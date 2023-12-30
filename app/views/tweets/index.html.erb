@@ -1,0 +1,36 @@
+<p>
+    <% if current_user %>
+        <%= link_to 'ツイートする', new_tweet_path %>
+    <% end %>
+</p>
+
+<% @tweets.each do |tweet| %>
+    <p>
+        <%= tweet.message %>
+        
+        <% if current_user %>
+            <% if  tweet.likes.find_by(user_id: current_user.id) %>
+                <%= link_to 'いいね削除', like_path(tweet), method: :delete %>
+            <% else %>
+                <%= link_to 'いいね', likes_path(tweet_id: tweet.id), method: :post %>
+            <% end %>
+        <% end %>
+
+        <% if current_user and tweet.user_id == current_user.id %>
+            <%= link_to 'ツイートを削除', tweet_path(tweet) , method: :delete %>
+        <% end %>
+    </p>
+<% end %>
+
+
+<p>
+    <% if current_user %>
+        <%= link_to 'ログアウト', top_logout_path %>
+    <% else %>
+        <%= link_to 'ログイン', top_main_path %>
+    <% end %>
+</p>
+
+<p>
+    <%= link_to 'ユーザー一覧', users_path %>
+</p>

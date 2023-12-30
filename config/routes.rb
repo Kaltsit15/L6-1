@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  get 'top/login'
-  post 'top/login'
-  get 'top/logout'
-  resources :users
-  resources :tweets
-  resources :likes, only: [:create, :destroy]
-  
-  root 'tweets#index'
+    resources :users 
+    resources :tweets
+    resources :likes
+    post 'top/login'
+    get 'top/logout'
+    get 'top/main'
+    root 'tweets#index'
 end
